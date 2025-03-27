@@ -6,6 +6,6 @@ namespace SISTEMARH_BACKEND.Models
         public string Senha { get; set; }
         public bool Ativo { get; set; }
 
-        public Colaborador? Colaborador { get; set; }
+        public Colaborador? DadosColaborador { get; set; }
     }
 }

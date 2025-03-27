@@ -1,0 +1,6 @@
+@SistemaRH_Backend_HostAddress = http://localhost:5002
+
+GET {{SistemaRH_Backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
