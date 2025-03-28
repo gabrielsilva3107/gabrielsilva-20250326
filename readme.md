@@ -1,3 +1,4 @@
+
 # Sistema de Gestão de Colaboradores e Unidades
 
 Backend desenvolvido em .NET 6 com PostgreSQL e autenticação via JWT.
@@ -53,7 +54,7 @@ Para obter um token de acesso:
 }
 ```
 
-3. O token será retornado. Use o botão **Authorize** no Swagger para testar rotas protegidas (caso aplicável).
+3. O token será retornado.
 
 ---
 
@@ -77,6 +78,24 @@ Program.cs
 appsettings.json
 docker-compose.yml
 ```
+
+---
+
+## 📸 Testes no Swagger
+
+Aqui estão os resultados dos testes realizados via Swagger:
+
+- Teste da rota de Colaboradores:
+
+![Teste GET Colaboradores](./assets/Get_Colaborador.png)
+
+- Teste da rota de Unidades:
+
+![Teste GET Unidades](./assets/Get_Unidade.png)
+
+- Teste da rota de Usuários:
+
+![Teste GET Usuários](./assets/Get_Usuario.png)
 
 ---
 
