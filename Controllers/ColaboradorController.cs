@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SISTEMARH_BACKEND.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SISTEMARH_BACKEND.Controllers
 {
@@ -18,7 +19,7 @@ namespace SISTEMARH_BACKEND.Controllers
         public IActionResult GetColaboradores()
         {
             var colaboradores = _context.Colaboradores
-                .Select(c => new {c.Nome, c.Id, Unidade = c.Unidade.Nome})
+                .Select(c => new {c.Nome, c.Id, UsuarioId = c.UsuarioId, Unidade = c.Unidade.Nome})
                 .ToList();
 
             return Ok(colaboradores);
@@ -27,6 +28,10 @@ namespace SISTEMARH_BACKEND.Controllers
         [HttpPost]
         public IActionResult CriarColaboradores([FromBody] Colaborador colaborador)
         {
+            var unidade = _context.Unidades.Find(colaborador.UnidadeId);
+            if (unidade == null || !unidade.Ativo)
+                return BadRequest("Não é possível cadastrar colaboradores em unidade inativa");
+
             _context.Colaboradores.Add(colaborador);
             _context.SaveChanges();
 
@@ -36,6 +41,10 @@ namespace SISTEMARH_BACKEND.Controllers
         [HttpPut("{id}")]
         public IActionResult AtualizarColaborador(int id, [FromBody] Colaborador dados)
         {
+            var unidade = _context.Unidades.Find(dados.UnidadeId);
+            if (unidade == null || !unidade.Ativo)
+                return BadRequest("Não é possível cadastrar colaboradores em unidade inativa");
+
             var colaborador = _context.Colaboradores.Find(id);
             if (colaborador == null)
                 return NotFound("Usuário não encontrado");

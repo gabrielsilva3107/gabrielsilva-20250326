@@ -15,13 +15,26 @@ namespace SISTEMARH_BACKEND.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetUsuarios()
+        public IActionResult GetUsuarios([FromQuery] bool? status)
         {
+            if (status == null)
+            {
             var usuarios = _context.Usuarios
                 .Select(u => new { u.Id, u.Login, u.Ativo })
                 .ToList();
 
             return Ok(usuarios);
+            }
+            else
+            {
+                var usuariosFiltrados = _context.Usuarios
+                .Where(u => u.Ativo == status)
+                .Select(u => new {u.Id, u.Login, u.Ativo})
+                .ToList();
+
+                return Ok(usuariosFiltrados);
+            }
+
         }
 
         [HttpPost]
